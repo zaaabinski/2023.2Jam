@@ -7,12 +7,23 @@ public class DepthScript : MonoBehaviour
 {
    [SerializeField] Transform underwaterBase;
     [SerializeField] Transform player;
+    [SerializeField] CameraFollow CF;
     public float distanceFromBase;
     [SerializeField] TextMeshProUGUI distanceTXT;
+    float minCamOffest = 0.5f;
+    float maxCamOffset = 2.5f;
+    float camOffset;
+    private void Start()
+    {
+        camOffset = CF.heightOffset;
+    }
     private void FixedUpdate()
     {
         distanceFromBase = Mathf.Ceil(Mathf.Abs(player.transform.position.x - underwaterBase.transform.position.x) + Mathf.Abs(player.transform.position.z - underwaterBase.transform.position.z));
         distanceTXT.text = distanceFromBase.ToString() + " m";
+        camOffset = 0.5f + distanceFromBase / 100f;
+        camOffset = Mathf.Clamp(camOffset, minCamOffest, maxCamOffset);
+        CF.heightOffset = camOffset;
     }
 
 }
