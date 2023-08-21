@@ -21,7 +21,7 @@ public class DepthScript : MonoBehaviour
     {
         distanceFromBase = Mathf.Ceil(Mathf.Abs(player.transform.position.x - underwaterBase.transform.position.x) + Mathf.Abs(player.transform.position.z - underwaterBase.transform.position.z));
         distanceTXT.text = distanceFromBase.ToString() + " m";
-        camOffset = 0.5f + distanceFromBase / 100f;
+        camOffset = 0.5f + distanceFromBase / 50f;
         camOffset = Mathf.Clamp(camOffset, minCamOffest, maxCamOffset);
         CF.heightOffset = camOffset;
     }
