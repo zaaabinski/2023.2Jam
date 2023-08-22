@@ -7,6 +7,7 @@ public class ItemPickUp : MonoBehaviour
     bool canPickup = false;
     [SerializeField] GameObject pickupUI;
     private GameObject itemInRange;
+    public bool itemPickedUp;
     private void OnTriggerEnter(Collider other)
     {
        if(other.CompareTag("Collectible"))
@@ -17,6 +18,14 @@ public class ItemPickUp : MonoBehaviour
             itemInRange = other.gameObject;
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Collectible"))
+        {
+            pickupUI.SetActive(false);
+            canPickup = false;
+        }
+        }
     // Update is called once per frame
     void Update()
     {
@@ -29,6 +38,7 @@ public class ItemPickUp : MonoBehaviour
     {
         Debug.Log("PickedItem");
         Destroy(itemInRange,0.1f);
+        itemPickedUp = true;
         canPickup = false;
         pickupUI.SetActive(false);
     }
