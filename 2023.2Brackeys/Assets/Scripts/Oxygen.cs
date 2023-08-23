@@ -8,6 +8,7 @@ using UnityEngine.Rendering.Universal;
 public class Oxygen : MonoBehaviour
 {
     public int oxygenLeft;
+    public int startOxygen;
     [SerializeField] Volume postProcessingVolume;
     [SerializeField] Vignette postVignette;
     [SerializeField] Slider oxygenSlider;
@@ -19,8 +20,9 @@ public class Oxygen : MonoBehaviour
     //float helpDivider;
     private void Start()
     {
+        oxygenLeft = startOxygen;
         holdBreathTimer = Random.Range(1, 7);
-        oxygenSlider.maxValue = oxygenLeft;
+        oxygenSlider.maxValue = startOxygen;
         intesity = 0.3f;
         InvokeRepeating("DepleteOxygen", 1f, 1f);
          
