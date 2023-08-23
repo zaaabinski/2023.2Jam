@@ -11,6 +11,7 @@ public class TopDownPlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         rb = GetComponent<Rigidbody>();
     }
     private void FixedUpdate()
