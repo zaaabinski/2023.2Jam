@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TopDownPlayerMovement : MonoBehaviour
 {
-    public float movementSpeed = 5f;
-    public float rotationSpeed = 10f;
-
+    [SerializeField] float movementSpeed = 5f;
+    [SerializeField] float rotationSpeed = 10f;
+    [SerializeField] Animator anim;
     private Rigidbody rb;
 
     private void Start()
@@ -38,15 +38,16 @@ public class TopDownPlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
+        //animate 
+        Vector3 direction = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+        if (direction == Vector3.zero)
+        {
+            anim.SetFloat("Speed", 0);
+        }
+        else
+        {
+            anim.SetFloat("Speed", 1);
+        }
     }
-    //animate 
-    /*Vector3 direction = new Vector3(horizontalInput, 0f, verticalInput).normalized;
-    if (direction == Vector3.zero)
-    {
-        anim.SetFloat("Speed", 0);
-    }
-    else
-    {
-        anim.SetFloat("Speed", 1);
-    }*/
+   
 }
