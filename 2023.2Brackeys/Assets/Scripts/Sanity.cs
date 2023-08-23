@@ -28,7 +28,10 @@ public class Sanity : MonoBehaviour
         GameObject monster = Instantiate(monsterPref);
 
         monsterCount++;
-        monster.transform.position = new Vector3(gameObject.transform.position.x + Random.Range(8,15.5f), 0.1f, gameObject.transform.position.z + Random.Range(-5, -8.5f));
+        Vector2 randomCirclePoint = Random.insideUnitCircle.normalized * Random.Range(10, 15);
+        Vector3 randomPosition = gameObject.transform.position + new Vector3(randomCirclePoint.x, 0.2f, randomCirclePoint.y);
+        //transform.position = randomPosition;
+        monster.transform.position = randomPosition;
         yield return new WaitForSeconds(2);
         canSpawn = true;
     }
