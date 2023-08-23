@@ -13,6 +13,7 @@ public class DepthScript : MonoBehaviour
     float minCamOffest = 0.5f;
     float maxCamOffset = 2.5f;
     float camOffset;
+    float fogDens;
     private void Start()
     {
         camOffset = CF.heightOffset;
@@ -24,6 +25,8 @@ public class DepthScript : MonoBehaviour
         camOffset = 0.5f + distanceFromBase / 50f;
         camOffset = Mathf.Clamp(camOffset, minCamOffest, maxCamOffset);
         CF.heightOffset = camOffset;
+        fogDens = 0.1f + distanceFromBase / 1000f;
+        RenderSettings.fogDensity = fogDens;
     }
 
 }

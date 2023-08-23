@@ -13,12 +13,14 @@ public class Oxygen : MonoBehaviour
     [SerializeField] Slider oxygenSlider;
     [SerializeField] float intesityToAdd;
     float intesity;
+    [SerializeField] ParticleSystem bubles;
+    [SerializeField] int breathTime=0;
+    int holdBreathTimer;
     //float helpDivider;
     private void Start()
     {
+        holdBreathTimer = Random.Range(1, 7);
         oxygenSlider.maxValue = oxygenLeft;
-        /*helpDivider = oxygenLeft / 5f;
-        intesityToAdd = oxygenLeft / 1000f /helpDivider;*/
         intesity = 0.3f;
         InvokeRepeating("DepleteOxygen", 1f, 1f);
          
@@ -39,12 +41,23 @@ public class Oxygen : MonoBehaviour
         {
             NoOxygenLeft();
         }
+        if(breathTime>=holdBreathTimer)
+        {
+            BlowAir();
+            breathTime = 0;
+            holdBreathTimer = Random.Range(1, 7);
+        }
+    }
+    void BlowAir()
+    {
+        bubles.Play();
     }
     void DepleteOxygen()
     {
         oxygenLeft--;
         intesity += intesityToAdd;
         postVignette.intensity.Override(intesity);
+        breathTime++;
     }
     void NoOxygenLeft()
     {
