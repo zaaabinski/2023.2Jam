@@ -11249,7 +11249,7 @@ Transform:
   m_GameObject: {fileID: 919132149394494030}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.82, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11343,6 +11343,8 @@ GameObject:
   - component: {fileID: 919132149394494035}
   - component: {fileID: 919132149394494036}
   - component: {fileID: 919132149394494037}
+  - component: {fileID: 919132149394494038}
+  - component: {fileID: 919132149394494039}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -11359,8 +11361,8 @@ Rigidbody:
   m_GameObject: {fileID: 919132149394494030}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 2
-  m_AngularDrag: 5
+  m_Drag: 1.5
+  m_AngularDrag: 4
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -11407,6 +11409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oxygenLeft: 30
+  startOxygen: 30
   postProcessingVolume: {fileID: 330585548}
   postVignette: {fileID: 0}
   oxygenSlider: {fileID: 654770277}
@@ -11465,6 +11468,38 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.69, z: 0}
+--- !u!114 &919132149394494038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149394494030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f433e6f6f8370af4ebab9d7accae7095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashCD: 2
+  dashDuration: 1
+  dashDistance: 2
+--- !u!114 &919132149394494039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149394494030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a531e0bba42d221449ce39cf3545da90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OX: {fileID: 919132149394494034}
+  DP: {fileID: 919132149394494033}
+  monsterPref: {fileID: 3730213941714261168, guid: 4114f8672e4836f44b35b9139d2df013,
+    type: 3}
+  sanity: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
