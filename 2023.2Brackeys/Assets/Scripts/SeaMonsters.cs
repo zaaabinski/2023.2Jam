@@ -14,7 +14,7 @@ public class SeaMonsters : MonoBehaviour
     }
     private void Update()
     {
-        Renderer mRenerer = gameObject.GetComponent<Renderer>();
+        Renderer mRenerer = gameObject.GetComponentInChildren<Renderer>();
         
         if (!mRenerer.isVisible)
         {
