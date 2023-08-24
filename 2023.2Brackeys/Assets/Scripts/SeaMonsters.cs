@@ -19,7 +19,7 @@ public class SeaMonsters : MonoBehaviour
         if (!mRenerer.isVisible)
         {
             timeNotVisible += Time.deltaTime;
-            if (timeNotVisible > 4)
+            if (timeNotVisible > 7.5f)
             {
                 Destroy(gameObject);
             }

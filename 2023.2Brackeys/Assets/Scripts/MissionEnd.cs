@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class MissionEnd : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    public int boltsStored;
+
+
+    private void Update()
     {
-        if(other.gameObject.CompareTag("Player"))
+        if(boltsStored>=100)
         {
-            ItemPickUp IPU = other.GetComponent<ItemPickUp>();
-            if(IPU.itemPickedUp)
-            {
-                Debug.LogWarning("Mission complete");
-                Time.timeScale = 0f;
-            }
+            Debug.Log("Game won");
         }
     }
 }

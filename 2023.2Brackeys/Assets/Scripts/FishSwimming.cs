@@ -30,7 +30,7 @@ public class FishSwimming : MonoBehaviour
 
                 Vector3 direction = (endPos - startPos).normalized;
                 float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-                Quaternion targetRotation = Quaternion.Euler(0, angle, 90);
+                Quaternion targetRotation = Quaternion.Euler(0, angle, 0);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5);
 
                 yield return null;
@@ -38,14 +38,7 @@ public class FishSwimming : MonoBehaviour
 
             // Ensure the object reaches the final position exactly
             transform.position = endPos;
-            if(transform.position == endPos)
-            {
-                yield return new WaitForSeconds(1);
-            }
-            else
-            {
-                yield return new WaitForSeconds(2);
-            }
+          
             
         }
     }
