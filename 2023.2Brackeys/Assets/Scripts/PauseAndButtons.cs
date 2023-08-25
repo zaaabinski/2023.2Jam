@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseAndButtons : MonoBehaviour
 {
     public bool isPaused = false;
+    [SerializeField] GameObject userUI;
     [SerializeField] GameObject pauseCanvas;
     [SerializeField] GameObject optionsCanvas;
     private void Update()
@@ -25,12 +26,14 @@ public class PauseAndButtons : MonoBehaviour
     public void Pause()
     {
         isPaused = true;
+        userUI.SetActive(false);
         pauseCanvas.SetActive(true);
         Time.timeScale = 0f;
     }
     public void UnPause()
     {
         isPaused = false;
+        userUI.SetActive(true);
         pauseCanvas.SetActive(false);
         Time.timeScale = 1f;
     }
