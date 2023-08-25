@@ -5,10 +5,16 @@ using UnityEngine;
 public class SeaMonsters : MonoBehaviour
 {
     float timeNotVisible = 0;
+    Animator anim;
+    private void Start()
+    {
+        anim = gameObject.GetComponentInChildren<Animator>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
+            anim.SetTrigger("Bite");
             Debug.Log("Game over");
         }
     }
