@@ -7,7 +7,8 @@ public class Sanity : MonoBehaviour
     int monsterCount;
     [SerializeField] Oxygen OX;
     [SerializeField] DepthScript DP;
-    [SerializeField] GameObject monsterPref;
+    [SerializeField] GameObject monsterPref1;
+    [SerializeField] GameObject monsterPref2;
     //sanity calculator
     public float sanity = 100f;
     int oxDiff;
@@ -25,8 +26,16 @@ public class Sanity : MonoBehaviour
     IEnumerator SpawnMonster()
     {
         canSpawn = false;
-        GameObject monster = Instantiate(monsterPref);
-
+        GameObject monsterPref;
+        if (Random.Range(1,3)==1)
+        {
+            monsterPref = monsterPref1;
+        }
+        else
+        {
+            monsterPref = monsterPref2;
+        }
+         GameObject monster = Instantiate(monsterPref);
         monsterCount++;
         Vector2 randomCirclePoint = Random.insideUnitCircle.normalized * Random.Range(10, 15);
         Vector3 randomPosition = gameObject.transform.position + new Vector3(randomCirclePoint.x, 0.2f, randomCirclePoint.y);
