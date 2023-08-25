@@ -8,7 +8,11 @@ public class SeaMonsters : MonoBehaviour
     Animator anim;
     private void Start()
     {
+<<<<<<< Updated upstream
     anim = gameObject.GetComponentInChildren<Animator>();
+=======
+        anim= gameObject.GetComponentInChildren<Animator>();
+>>>>>>> Stashed changes
     }
     private void OnTriggerEnter(Collider other)
     {

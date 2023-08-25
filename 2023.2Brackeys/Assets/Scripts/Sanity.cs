@@ -27,7 +27,12 @@ public class Sanity : MonoBehaviour
     {
         canSpawn = false;
         GameObject monsterPref;
+<<<<<<< Updated upstream
         if (Random.Range(1,3)==1)
+=======
+        int rand = Random.Range(1, 3);
+        if (rand == 1)
+>>>>>>> Stashed changes
         {
             monsterPref = monsterPref1;
         }
@@ -35,7 +40,12 @@ public class Sanity : MonoBehaviour
         {
             monsterPref = monsterPref2;
         }
+<<<<<<< Updated upstream
          GameObject monster = Instantiate(monsterPref);
+=======
+        GameObject monster = Instantiate(monsterPref);
+
+>>>>>>> Stashed changes
         monsterCount++;
         Vector2 randomCirclePoint = Random.insideUnitCircle.normalized * Random.Range(10, 15);
         Vector3 randomPosition = gameObject.transform.position + new Vector3(randomCirclePoint.x, 0.2f, randomCirclePoint.y);

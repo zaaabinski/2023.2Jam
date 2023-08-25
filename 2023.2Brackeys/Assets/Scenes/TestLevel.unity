@@ -11566,7 +11566,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OX: {fileID: 919132149394494034}
   DP: {fileID: 919132149394494033}
+<<<<<<< Updated upstream
   monsterPref: {fileID: 3730213941714261168, guid: 4114f8672e4836f44b35b9139d2df013,
+=======
+  monsterPref1: {fileID: 289875494748532165, guid: 16956fa544514b74592a3dc707df1f30,
+    type: 3}
+  monsterPref2: {fileID: 5213362419145863168, guid: e047e471616ccec46933465eaca57797,
+>>>>>>> Stashed changes
     type: 3}
   sanity: 100
 --- !u!1660057539 &9223372036854775807
