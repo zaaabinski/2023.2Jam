@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37724ddca939f3f469023f0948d10c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 4
+  detectionRange: 6
   patrolSpeed: 1.5
   chaseSpeed: 2
   constantYPosition: 0.1
