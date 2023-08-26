@@ -18,6 +18,7 @@ public class Oxygen : MonoBehaviour
     [SerializeField] int breathTime=0;
     int holdBreathTimer;
     //float helpDivider;
+    [SerializeField] PauseAndButtons PAB;
     private void Start()
     {
         oxygenLeft = startOxygen;
@@ -42,6 +43,7 @@ public class Oxygen : MonoBehaviour
         if(oxygenLeft<=0)
         {
             NoOxygenLeft();
+            PAB.GameLost();
         }
         if(breathTime>=holdBreathTimer)
         {

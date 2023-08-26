@@ -9,6 +9,8 @@ public class PauseAndButtons : MonoBehaviour
     [SerializeField] GameObject userUI;
     [SerializeField] GameObject pauseCanvas;
     [SerializeField] GameObject optionsCanvas;
+    [SerializeField] GameObject gameWonCanvas;
+    [SerializeField] GameObject gameLostCanvas;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -23,11 +25,13 @@ public class PauseAndButtons : MonoBehaviour
             }
         }
     }
+
     public void Pause()
     {
-        isPaused = true;
+        Debug.Log("Pausing");
         userUI.SetActive(false);
         pauseCanvas.SetActive(true);
+        isPaused = true;
         Time.timeScale = 0f;
     }
     public void UnPause()
@@ -61,5 +65,21 @@ public class PauseAndButtons : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void ResetScene()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void GameWon()
+    {
+        Time.timeScale = 0f;
+        gameWonCanvas.SetActive(true);
+    }
+    public void GameLost()
+    {
+        Time.timeScale = 0f;
+        gameLostCanvas.SetActive(true);
     }
 }
