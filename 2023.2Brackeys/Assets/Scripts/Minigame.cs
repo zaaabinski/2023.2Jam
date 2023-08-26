@@ -6,6 +6,7 @@ using UnityEngine;
 public class Minigame : MonoBehaviour
 {
     [SerializeField] GameObject gameUI;
+    [SerializeField] GameObject playerUI;
     [SerializeField] List<Transform> placeHoldersL;
     [SerializeField] List<Transform> placeHoldersR;
     [SerializeField] List<GameObject> wiresL;
@@ -25,7 +26,7 @@ public class Minigame : MonoBehaviour
     {
         totalConnceted = 0;
         minigameWon = false;
-
+        playerUI.SetActive(false);
         gameUI.SetActive(true);
         redB = false; greenB = false; blueB = false; yellowB = false;
         red = 0; green = 0; blue = 0; yellow = 0;
@@ -145,6 +146,7 @@ public class Minigame : MonoBehaviour
         Debug.Log("Win");
         minigameWon = true;
         yield return new WaitForSecondsRealtime(0.5f);
+        playerUI.SetActive(true);
         gameUI.SetActive(false);
         Time.timeScale = 1f;
     }
