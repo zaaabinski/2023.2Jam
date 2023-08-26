@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaypointToObjective : MonoBehaviour
 {
-    [SerializeField] Transform player;
+   /* [SerializeField] Transform player;
     [SerializeField] Transform targetObject1;
     [SerializeField] Transform targetObject2;
     [SerializeField] RectTransform arrowTransform;
@@ -35,5 +35,5 @@ public class WaypointToObjective : MonoBehaviour
             arrowTransform.rotation = Quaternion.Euler(0f, 0f, -angle);
         }
 
-    }
+    }*/
 }

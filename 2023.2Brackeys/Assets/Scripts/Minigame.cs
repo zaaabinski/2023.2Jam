@@ -19,6 +19,7 @@ public class Minigame : MonoBehaviour
     [SerializeField] List<RectTransform> wire;
     [SerializeField] List<Transform> startConnect;
     [SerializeField] List<Transform> endConnect;
+    [SerializeField] List<GameObject> wiresToHide;
 
     public bool Game()
     {
@@ -41,6 +42,7 @@ public class Minigame : MonoBehaviour
             totalConnceted++;
             redB = true;
             StretchImage(wire[0], startConnect[0], endConnect[0]);
+            wiresToHide[0].SetActive(false);
         }
         if (green == 2 && !greenB)
         {
@@ -48,6 +50,7 @@ public class Minigame : MonoBehaviour
             totalConnceted++;
             greenB = true;
             StretchImage(wire[1], startConnect[1], endConnect[1]);
+            wiresToHide[1].SetActive(false);
         }
         if (blue == 2 && !blueB)
         {
@@ -55,6 +58,7 @@ public class Minigame : MonoBehaviour
             totalConnceted++;
             blueB = true;
             StretchImage(wire[2], startConnect[2], endConnect[2]);
+            wiresToHide[2].SetActive(false);
         }
         if (yellow == 2 && !yellowB)
         {
@@ -62,6 +66,7 @@ public class Minigame : MonoBehaviour
             totalConnceted++;
             yellowB = true;
             StretchImage(wire[3], startConnect[3], endConnect[3]);
+            wiresToHide[3].SetActive(false);
         }
         if(totalConnceted==4 && !minigameWon)
         {
