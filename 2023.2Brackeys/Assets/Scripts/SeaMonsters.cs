@@ -6,8 +6,10 @@ public class SeaMonsters : MonoBehaviour
 {
     float timeNotVisible = 0;
     Animator anim;
+    [SerializeField] PauseAndButtons PAB;
     private void Start()
     {
+        PAB = GameObject.Find("Canvas").GetComponent<PauseAndButtons>();    
         anim = gameObject.GetComponentInChildren<Animator>();
     }
     private void OnTriggerEnter(Collider other)
@@ -16,6 +18,7 @@ public class SeaMonsters : MonoBehaviour
         {
             anim.SetTrigger("Bite");
             Debug.Log("Game over");
+            PAB.GameLost();
         }
     }
     private void Update()

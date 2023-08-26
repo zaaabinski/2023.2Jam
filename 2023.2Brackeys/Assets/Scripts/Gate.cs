@@ -12,16 +12,16 @@ public class Gate : MonoBehaviour
     {
         MG = minigameUI.GetComponent<Minigame>();
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Player"))
         {
             //start minigame
             inMinigame= true;
             MG.Game();
         }
     }
- 
+
     private void Update()
     {
         if (MG.minigameWon && inMinigame)
