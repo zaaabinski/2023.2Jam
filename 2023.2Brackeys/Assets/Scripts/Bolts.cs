@@ -6,6 +6,8 @@ using TMPro;
 public class Bolts : MonoBehaviour
 {
     public int boltNumber;
+    [SerializeField] AudioSource AS;
+    [SerializeField] AudioSource AS2;
     int boltCapacity = 20;
     [SerializeField] MissionEnd ME;
     [SerializeField] GameObject showMessage;
@@ -17,6 +19,7 @@ public class Bolts : MonoBehaviour
             if (boltNumber < boltCapacity)
             {
                 boltNumber += 5;
+                AS.Play();
                 Destroy(other.gameObject);
             }
             else
@@ -29,6 +32,7 @@ public class Bolts : MonoBehaviour
         {
             ME = other.GetComponent<MissionEnd>();
             ME.boltsStored += boltNumber;
+            AS2.Play();
             boltNumber= 0;
         }
     }

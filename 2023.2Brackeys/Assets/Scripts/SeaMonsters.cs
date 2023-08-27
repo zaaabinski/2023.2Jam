@@ -7,6 +7,7 @@ public class SeaMonsters : MonoBehaviour
     //float timeNotVisible = 0;
     Animator anim;
     [SerializeField] PauseAndButtons PAB;
+    [SerializeField] AudioSource AS;
     private void Start()
     {
         PAB = GameObject.Find("Canvas").GetComponent<PauseAndButtons>();    
@@ -40,6 +41,7 @@ public class SeaMonsters : MonoBehaviour
     {
         anim.SetTrigger("Bite");
         Debug.Log("Game over");
+        AS.Play();
         yield return new WaitForSeconds(0.5f);
         PAB.GameLost();
     }

@@ -7,6 +7,7 @@ using UnityEngine.Rendering.Universal;
 
 public class Oxygen : MonoBehaviour
 {
+    [SerializeField] AudioSource As;
     public int oxygenLeft;
     public int startOxygen;
     [SerializeField] Transform meterNeedle;
@@ -16,13 +17,16 @@ public class Oxygen : MonoBehaviour
     [SerializeField] Volume postProcessingVolume;
     [SerializeField] Vignette postVignette;
     //[SerializeField] Slider oxygenSlider;
-    [SerializeField] float intesityToAdd;
-    float intesity;
+    public float intesityToAdd;
+    public float intesity;
     [SerializeField] ParticleSystem bubles;
     [SerializeField] int breathTime=0;
     int holdBreathTimer;
     //float helpDivider;
     [SerializeField] PauseAndButtons PAB;
+    bool didntShow = true;
+    [SerializeField] AudioSource IN;
+    [SerializeField] AudioSource OUT;
     private void Start()
     {
         oxygenLeft = startOxygen;
@@ -44,28 +48,40 @@ public class Oxygen : MonoBehaviour
 
     private void Update()
     {
+        postVignette.intensity.Override(intesity);
         //oxygenSlider.value = oxygenLeft;
-        if(oxygenLeft<=0)
+        if (oxygenLeft<=0)
         {
             NoOxygenLeft();
             PAB.GameLost();
         }
         if(breathTime>=holdBreathTimer)
         {
-            BlowAir();
+            StartCoroutine(BlowAir());
             breathTime = 0;
-            holdBreathTimer = Random.Range(1, 7);
+            holdBreathTimer = Random.Range(3, 8);
         }
         float rotation = -60.0f + (120.0f * (oxygenLeft / 60.0f));
 
         // Apply the rotation to the object
         meterNeedle.rotation = Quaternion.Euler(0.0f, 0.0f, -rotation);
-
+        if(oxygenLeft>15)
+        {
+            didntShow = true;
+        }
         // Rotate the object over time
         meterNeedle.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+        if(oxygenLeft<15 && didntShow)
+        {
+            As.Play();
+            didntShow= false;
+        }
     }
-    void BlowAir()
+    IEnumerator BlowAir()
     {
+        IN.Play();
+        yield return new WaitForSeconds(1.2f);
+        OUT.Play();
         bubles.Play();
     }
     void DepleteOxygen()
@@ -76,6 +92,7 @@ public class Oxygen : MonoBehaviour
         breathTime++;
         
     }
+
     void NoOxygenLeft()
     {
         Time.timeScale = 0f;

@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Minigame : MonoBehaviour
 {
+    [SerializeField] AudioSource As;
     [SerializeField] GameObject gameUI;
     [SerializeField] GameObject playerUI;
     [SerializeField] List<Transform> placeHoldersL;
@@ -24,6 +26,7 @@ public class Minigame : MonoBehaviour
 
     public bool Game()
     {
+      
         totalConnceted = 0;
         minigameWon = false;
         playerUI.SetActive(false);
@@ -33,6 +36,13 @@ public class Minigame : MonoBehaviour
         Time.timeScale = 0f;
         PlaceWires(placeHoldersL, wiresL);
         PlaceWires(placeHoldersR, wiresR);
+        for (int i = 0; i < 4; i++)
+        {
+            wire[i].transform.localPosition = new Vector3(150, 0, 0);
+            Image im = wire[i].GetComponent<Image>();
+            im.rectTransform.sizeDelta = new Vector2(75, 75);
+            im.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+        }
         return true;
     }
     private void Update()
@@ -123,29 +133,37 @@ public class Minigame : MonoBehaviour
         blue = 0;
     }
 
-    private void StretchImage(RectTransform imageRectTransform,Transform startPoint, Transform endPoint)
+    private void StretchImage(RectTransform imageRectTransform, Transform startPoint, Transform endPoint)
     {
         // Calculate the distance between the points
-        float distance = Vector2.Distance(startPoint.transform.position, endPoint.transform.position);
+        float distance = Vector2.Distance(startPoint.position, endPoint.position);
 
-        // Set the size of the image RectTransform
-        imageRectTransform.sizeDelta = new Vector2(distance, imageRectTransform.sizeDelta.y);
+        // Set the size of the image RectTransform along the x-axis
+        imageRectTransform.sizeDelta = new Vector2(distance*2.1f, imageRectTransform.sizeDelta.y);
+
+        // Calculate the center position between the points
+        Vector2 centerPosition = (startPoint.position + endPoint.position) / 2f;
+
+        // Set the position of the image RectTransform
+        imageRectTransform.position = centerPosition;
 
         // Calculate the angle between the points
-        float angle = Mathf.Atan2(endPoint.transform.position.y - startPoint.transform.position.y, endPoint.transform.position.x - startPoint.transform.position.x) * Mathf.Rad2Deg;
+        Vector2 direction = endPoint.position - startPoint.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         // Set the rotation of the image RectTransform
         imageRectTransform.rotation = Quaternion.Euler(0f, 0f, angle);
-
-        // Set the position of the image RectTransform
-        imageRectTransform.position = (startPoint.transform.position + endPoint.transform.position) / 2f;
     }
+
+
+
 
     IEnumerator Win()
     {
         Debug.Log("Win");
         minigameWon = true;
         yield return new WaitForSecondsRealtime(0.5f);
+        As.Play();
         playerUI.SetActive(true);
         gameUI.SetActive(false);
         Time.timeScale = 1f;

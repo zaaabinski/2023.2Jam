@@ -12,6 +12,11 @@ public class PauseAndButtons : MonoBehaviour
     [SerializeField] GameObject optionsCanvas;
     [SerializeField] GameObject gameWonCanvas;
     [SerializeField] GameObject gameLostCanvas;
+    [SerializeField] GameObject tutCanvas;
+    private void Start()
+    {
+        Time.timeScale = 0f;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -55,7 +60,7 @@ public class PauseAndButtons : MonoBehaviour
     }
     public void PlayGame()
     {
-        StartCoroutine (PlayGameE());   
+        StartCoroutine(PlayGameE());
     }
     public IEnumerator PlayGameE()
     {
@@ -66,7 +71,7 @@ public class PauseAndButtons : MonoBehaviour
     }
     public void ResetScene()
     {
-            StartCoroutine(ResetSceneE());
+        StartCoroutine(ResetSceneE());
     }
     public IEnumerator ResetSceneE()
     {
@@ -96,11 +101,18 @@ public class PauseAndButtons : MonoBehaviour
     public void GameWon()
     {
         Time.timeScale = 0f;
+        userUI.SetActive(false);
         gameWonCanvas.SetActive(true);
     }
     public void GameLost()
     {
         Time.timeScale = 0f;
         gameLostCanvas.SetActive(true);
+    }
+    public void HideTut()
+    {
+        Time.timeScale = 1f;
+        tutCanvas.SetActive(false);
+        userUI.SetActive(true);
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class AddOxygen : MonoBehaviour
 {
     [SerializeField] int howMuchToAdd;
+    [SerializeField] Oxygen OX;
+    [SerializeField] AudioSource AS;
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
@@ -18,7 +20,15 @@ public class AddOxygen : MonoBehaviour
             {
                 ox.oxygenLeft += howMuchToAdd;
             }
-            Destroy(gameObject);
+            AS.Play();
+            ox.intesity -= ox.intesityToAdd * 15;
+            StartCoroutine(HideAndShow());
         }
+    }
+    IEnumerator HideAndShow()
+    {
+        transform.position = new Vector3(transform.position.x, -10f,transform.position.z);
+        yield return new WaitForSeconds(12);
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
     }
 }

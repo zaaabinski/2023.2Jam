@@ -15,12 +15,12 @@ public class MissionEnd : MonoBehaviour
     }
     private void Update()
     {
+        boltText.text = boltsStored.ToString() + "/100";
         if(boltsStored>=100)
         {
             Debug.Log("Game won");
             PAB.GameWon();
 
         }
-        boltText.text = boltsStored.ToString() + "/100";
     }
 }
