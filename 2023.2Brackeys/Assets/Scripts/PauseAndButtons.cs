@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseAndButtons : MonoBehaviour
 {
     public bool isPaused = false;
+    [SerializeField] Animator changeAnim;
     [SerializeField] GameObject userUI;
     [SerializeField] GameObject pauseCanvas;
     [SerializeField] GameObject optionsCanvas;
@@ -43,12 +44,38 @@ public class PauseAndButtons : MonoBehaviour
     }
     public void GoToMenu()
     {
+        StartCoroutine(GoToMenuE());
+    }
+    public IEnumerator GoToMenuE()
+    {
+        Time.timeScale = 1f;
+        changeAnim.SetTrigger("Change");
+        yield return new WaitForSecondsRealtime(1f);
         SceneManager.LoadScene("Menu");
     }
     public void PlayGame()
     {
+        StartCoroutine (PlayGameE());   
+    }
+    public IEnumerator PlayGameE()
+    {
+        Time.timeScale = 1f;
+        changeAnim.SetTrigger("Change");
+        yield return new WaitForSecondsRealtime(1f);
         SceneManager.LoadScene(1);
     }
+    public void ResetScene()
+    {
+            StartCoroutine(ResetSceneE());
+    }
+    public IEnumerator ResetSceneE()
+    {
+        Time.timeScale = 1f;
+        changeAnim.SetTrigger("Change");
+        yield return new WaitForSecondsRealtime(1f);
+        SceneManager.LoadScene(1);
+    }
+
     public void ShowOptions()
     {
         if (pauseCanvas.activeInHierarchy)
@@ -66,12 +93,6 @@ public class PauseAndButtons : MonoBehaviour
     {
         Application.Quit();
     }
-
-    public void ResetScene()
-    {
-        SceneManager.LoadScene(1);
-    }
-
     public void GameWon()
     {
         Time.timeScale = 0f;

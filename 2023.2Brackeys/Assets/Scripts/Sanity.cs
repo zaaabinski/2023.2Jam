@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Sanity : MonoBehaviour
 {
-    int monsterCount;
+  /*  int monsterCount;
     [SerializeField] Oxygen OX;
     [SerializeField] DepthScript DP;
     [SerializeField] GameObject monsterPref1;
@@ -61,10 +62,11 @@ public class Sanity : MonoBehaviour
         monsterCount++;
         Vector2 randomCirclePoint = Random.insideUnitCircle.normalized * Random.Range(10, 12);
         Vector3 randomPosition = gameObject.transform.position + new Vector3(randomCirclePoint.x, 0.2f, randomCirclePoint.y);
-        //transform.position = randomPosition;
+
         monster.transform.position = randomPosition;
+
         yield return new WaitForSeconds(2);
         canSpawn = true;
-    }
+    }*/
 
 }
