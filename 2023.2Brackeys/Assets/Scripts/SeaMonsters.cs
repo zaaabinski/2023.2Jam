@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SeaMonsters : MonoBehaviour
 {
-    float timeNotVisible = 0;
+    //float timeNotVisible = 0;
     Animator anim;
     [SerializeField] PauseAndButtons PAB;
     private void Start()
@@ -16,14 +16,12 @@ public class SeaMonsters : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            anim.SetTrigger("Bite");
-            Debug.Log("Game over");
-            PAB.GameLost();
+            StartCoroutine(Bite());
         }
     }
     private void Update()
     {
-        Renderer mRenerer = gameObject.GetComponentInChildren<Renderer>();
+      /*  Renderer mRenerer = gameObject.GetComponentInChildren<Renderer>();
         
         if (!mRenerer.isVisible)
         {
@@ -36,6 +34,13 @@ public class SeaMonsters : MonoBehaviour
         else
         {
             timeNotVisible = 0;
-        }
+        }*/
+    }
+    IEnumerator Bite()
+    {
+        anim.SetTrigger("Bite");
+        Debug.Log("Game over");
+        yield return new WaitForSeconds(0.5f);
+        PAB.GameLost();
     }
 }

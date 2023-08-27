@@ -9,9 +9,13 @@ public class Oxygen : MonoBehaviour
 {
     public int oxygenLeft;
     public int startOxygen;
+    [SerializeField] Transform meterNeedle;
+    public float minRotation = -60.0f; // Rotation value when oxygenLeft is 60
+    public float maxRotation = 0.0f;   // Rotation value when oxygenLeft is 30
+    public float rotationSpeed = 1.0f; // Rotation speed
     [SerializeField] Volume postProcessingVolume;
     [SerializeField] Vignette postVignette;
-    [SerializeField] Slider oxygenSlider;
+    //[SerializeField] Slider oxygenSlider;
     [SerializeField] float intesityToAdd;
     float intesity;
     [SerializeField] ParticleSystem bubles;
@@ -23,7 +27,7 @@ public class Oxygen : MonoBehaviour
     {
         oxygenLeft = startOxygen;
         holdBreathTimer = Random.Range(1, 7);
-        oxygenSlider.maxValue = startOxygen;
+        //oxygenSlider.maxValue = startOxygen;
         intesity = 0.3f;
         InvokeRepeating("DepleteOxygen", 1f, 1f);
          
@@ -37,9 +41,10 @@ public class Oxygen : MonoBehaviour
         postProcessingVolume.profile.TryGet(out postVignette);
         postVignette.intensity.Override(intesity);
     }
+
     private void Update()
     {
-        oxygenSlider.value = oxygenLeft;
+        //oxygenSlider.value = oxygenLeft;
         if(oxygenLeft<=0)
         {
             NoOxygenLeft();
@@ -51,6 +56,13 @@ public class Oxygen : MonoBehaviour
             breathTime = 0;
             holdBreathTimer = Random.Range(1, 7);
         }
+        float rotation = -60.0f + (120.0f * (oxygenLeft / 60.0f));
+
+        // Apply the rotation to the object
+        meterNeedle.rotation = Quaternion.Euler(0.0f, 0.0f, -rotation);
+
+        // Rotate the object over time
+        meterNeedle.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
     }
     void BlowAir()
     {
@@ -62,6 +74,7 @@ public class Oxygen : MonoBehaviour
         intesity += intesityToAdd;
         postVignette.intensity.Override(intesity);
         breathTime++;
+        
     }
     void NoOxygenLeft()
     {
